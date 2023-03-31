@@ -1,0 +1,32 @@
+name: eco_project
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ">=2.19.4 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  auto_route: ^2.3.2
+  salomon_bottom_bar: ^3.1.0
+  google_maps_flutter: ^2.2.5
+  camera: ^0.10.3+2
+  image_picker: ^0.8.4+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.4
+  auto_route_generator: ^2.3.2
+  build_runner: ^2.1.2
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/photo_1.png
+    - assets/photo_map.png
+    - assets/photo_camera.png
