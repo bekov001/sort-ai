@@ -28,5 +28,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/photo_1.png
+    - assets/photo_2.jpeg
+    - assets/photo_3.jpeg
+    - assets/photo_4.jpeg
+    - assets/photo_5.jpeg
+    - assets/photo_6.jpeg
     - assets/photo_map.png
     - assets/photo_camera.png
