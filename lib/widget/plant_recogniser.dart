@@ -59,7 +59,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kBgColor,
+      color: Colors.white,
       width: double.infinity,
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -107,7 +107,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
   Widget _buildTitle() {
     return const Text(
-      'Plant Recogniser',
+      'Garbage Recogniser',
       style: kTitleTextStyle,
       textAlign: TextAlign.center,
     );
@@ -129,7 +129,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   fontFamily: kButtonFont,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w600,
-                  color: kColorLightYellow,
+                  color: Colors.white,
                 ))),
       ),
     );

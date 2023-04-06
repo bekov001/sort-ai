@@ -1,0 +1,8 @@
+0 cardboard
+1 e-waste
+2 glass
+3 medical
+4 metal
+5 paper
+6 plastic
+7 tetrapak
