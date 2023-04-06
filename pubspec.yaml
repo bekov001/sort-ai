@@ -43,3 +43,4 @@ flutter:
     - assets/photo_map.png
     - assets/photo_camera.png
     - assets/map_style.json
+    - assets/model_unquant.tflite
