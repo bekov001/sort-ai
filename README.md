@@ -1,16 +1,3 @@
-# eco_project
+Our project is AI which helps to automate the process of sorting & recycling garbage. The application that we made is capable of identifying the type of garbage (whether it's glass, food waste, e-waste, etc.) by uploaded photo. After you have identified the type of garbage, right in the application you can also check the map of recyclable garbage cans where you can throw away your waste. Also in our application, you could find instructions about how to identify the type of waste yourself, this would help to increase awareness of people about garbage recycling.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The AI model that we designed could be applied even outside of our application, for example, it could be linked to robots & machines so they could do garbage sorting work instead of humans
