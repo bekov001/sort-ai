@@ -37,11 +37,11 @@ const kAnalyzingTextStyle = TextStyle(
 const kResultTextStyle = TextStyle(
     fontFamily: kDisplayFont,
     fontSize: 35.0,
-    color: kColorLightYellow,
+    color: kColorHunterGreen,
     decoration: TextDecoration.none);
 
 const kResultRatingTextStyle = TextStyle(
     fontFamily: kMainFont,
     fontSize: 18.0,
-    color: Colors.white,
+    color: Colors.black,
     decoration: TextDecoration.none);

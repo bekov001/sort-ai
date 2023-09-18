@@ -1,6 +1,8 @@
 import 'dart:io';
 
-import 'package:eco_project/styles.dart';
+import 'package:eco_project/chat-screen.dart';
+
+import 'styles.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,11 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'sortAI',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.green,
-      // ),
-      home: const MyHomePage(title: 'sortAI'),
+      title: 'SortAI',
+      theme: ThemeData(
+          primarySwatch: Colors.green
+      ),
+      home: const MyHomePage(title: 'SortAI'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -39,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectIndex = 0;
   late Widget _bodyWidget;
+
 
   @override
   void initState() {
@@ -58,164 +61,317 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (widgetType) {
       case 0:
         return Container(
-          color: Colors.lightGreen.shade100,
+          color: Colors.lightGreen.shade50,
           width: double.infinity,
-           child: Column(
-             mainAxisSize: MainAxisSize.max,
-              children: [
-                SizedBox(
-                width: 250,
-                height: 50,
-                  child: ElevatedButton(
-                    onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyPlasticPage()));},
-                    child: Center(
-                    child: (
-                    Text('Plastic',
-                      style: const TextStyle(
-                        fontFamily: kButtonFont,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w600,
-                        )
-                        )),
-                )),
+          child: GridView.count(
+            // crossAxisCount is the number of columns
+            crossAxisCount: 2,
+            childAspectRatio: (200 / 230),
+            children: <Widget>[
+              Container(
 
-                SizedBox(
-                    width: 250,
-                    height: 50,
-                    child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyPaperPage()));},
-                        child: Center(
-                          child: (
-                              Text('Paper',
-                                  style: const TextStyle(
-                                    fontFamily: kButtonFont,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600,
-                                  )
-                              )),
-                        ))
+                margin: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyPlasticPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('Plastic',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50.0, top: 40.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/plastic-image.png",// width: 100,
+                                height: 250,
+                                width: 300,
+                                // fit:BoxFit.fill
 
-                ,
-            SizedBox(
-                width: 250,
-                height: 50,
-                child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyGlassPage()));},
-                    child: Center(
-                      child: (
-                          Text('Glass',
-                              style: const TextStyle(
-                                fontFamily: kButtonFont,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600,
-                              )
-                          )),
-                    ))
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
                 ),
-    SizedBox(
-    width: 250,
-    height: 50,
-    child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyEWastePage()));},
-    child: Center(
-    child: (
-    Text('E-Waste',
-    style: const TextStyle(
-    fontFamily: kButtonFont,
-    fontSize: 20.0,
-    fontWeight: FontWeight.w600,
-    )
-    )),
-    ))
+              ),
+              Container(
+
+                margin: EdgeInsets.fromLTRB(0, 8, 8, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyPaperPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('Paper',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50.0, top: 40.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/paper-image.png",// width: 100,
+                                height: 300,
+                                width: 300,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
                 ),
-                SizedBox(
-                width: 250,
-                height: 50,
-    child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyMedicalPage()));},
-    child: Center(
-    child: (
-    Text('Medical Waste',
-    style: const TextStyle(
-    fontFamily: kButtonFont,
-    fontSize: 20.0,
-    fontWeight: FontWeight.w600,
-    )
-    )),
-    ))
+              ),
+              Container(
+
+                margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyGlassPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('Glass',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50.0, top: 40.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/glass-image.png",// width: 100,
+                                height: 250,
+                                width: 300,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
                 ),
-                SizedBox(
-                width: 250,
-                height: 50,
-    child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MyMetalPage()));},
-    child: Center(
-    child: (
-    Text('Metal',
-    style: const TextStyle(
-    fontFamily: kButtonFont,
-    fontSize: 20.0,
-    fontWeight: FontWeight.w600,
-    )
-    )),
-    ))
-                )
-              ],
-            ),
+              ),
+              Container(
+
+                margin: EdgeInsets.fromLTRB(0, 0, 8, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyEWastePage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('E-Waste',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 90.0, top: 90.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child:Image.asset(
+                                "assets/img/battery-image.png",// width: 100,
+                                height: 120,
+                                // width: 400,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+
+                margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyMedicalPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('Medical Waste',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50.0, top: 40.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/img/medical-image.png",// width: 100,
+                                height: 250,
+                                width: 300,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+
+                margin: EdgeInsets.fromLTRB(0, 0, 8, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MyMetalPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('Metal',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50.0, top: 40.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/img/metal.png",// width: 100,
+                                height: 250,
+                                width: 300,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+
+                margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => TetrapakPage()))},
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                            child:
+                            Text('TetraPak',
+                                style: const TextStyle(
+                                  fontFamily: kButtonFont,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w600,
+                                )
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 70.0, top: 50.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              child: Image.asset(
+                                "assets/img/materials/tetrapak.png",// width: 100,
+                                height: 150,
+                                width: 110,
+                                // fit:BoxFit.fill
+
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+
         );
 
       case 1:
         return MaterialApp(
           home: const MainApp(),
           debugShowCheckedModeBanner: false,
-        );;/*Center(
-          child: Material(
-            color: Colors.green,
-            borderRadius: BorderRadius.circular(28),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: InkWell(
-              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MainApp()));},
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Ink.image(
-                    image: AssetImage('assets/photo_camera.png'),
-                    height: 150,
-                    width: 185,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(height: 6),
-                  SizedBox(width: 5,),
-                  Text('Camera', style: TextStyle(fontSize: 18),),
-                ],
-              ),
-            ),
-          ),
-        );*/
+        );
       case 2:
         return MaterialApp(
           home: const Map(),
           debugShowCheckedModeBanner: false,
         );
-          // Center(
-        //   child: Material(
-        //     color: Colors.green,
-        //     borderRadius: BorderRadius.circular(28),
-        //     clipBehavior: Clip.antiAliasWithSaveLayer,
-        //     child: InkWell(
-        //       onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => Map()));},
-        //       child: Column(
-        //         mainAxisSize: MainAxisSize.min,
-        //         children: [
-        //           Ink.image(
-        //             image: AssetImage('assets/photo_map.png'),
-        //             height: 150,
-        //             width: 185,
-        //             fit: BoxFit.cover,
-        //           ),
-        //           SizedBox(height: 6),
-        //           SizedBox(width: 5,),
-        //           Text('Map', style: TextStyle(fontSize: 18),),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // );
+      case 3:
+        return MaterialApp(
+          home: ChatScreen(),
+          debugShowCheckedModeBanner: false,
+        );
+
       default:
         throw ArgumentError();
     }
@@ -233,21 +389,31 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: onItemTepped,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Info',
+            icon: Icon(Icons.dataset_outlined),
+            label: 'Main',
+            // Color: Colors.grey
+            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera),
             label: 'Camera',
+            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Map',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_rounded),
+            label: 'Help',
+            backgroundColor: Colors.white,
           ),
         ],
-        iconSize: 40,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.lightGreenAccent,
+        iconSize: 36,
+        // backgroundColor: Colors.white,
+        selectedItemColor: Colors.green.shade800,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
@@ -261,7 +427,7 @@ class Map extends StatelessWidget {
     return const MaterialApp(
       home:  CustomMap(),
       debugShowCheckedModeBanner: false,
-      );
+    );
   }
 }
 class CustomMap extends StatefulWidget {
@@ -437,19 +603,79 @@ class MyPlasticPage extends StatelessWidget{
   Widget build(BuildContext){
     return Scaffold(
         appBar: AppBar(title: Text("SortAI"),),
-        body: Text(
-          "There are seven types of plastic, some of them are recycled and reused, others are not, and it is important to distinguish them from each other by labeling them. Plastic products marked PET, PEHD(HDPE), LDPE, PP, PS are recyclable and can be recycled. But its important to pay attention to the trash can you throw in, as some only accept certain types of plastic. Plastic labeled PVC or OTHER is not recyclable due to its complex composition and harmful emissions during their disposal. They should be thrown into the general trash can. How to properly dispose of plastic?\n"
-              "1. Prepare waste before disposal: containers must be clean, dried, it is advisable to remove stickers, labels;\n"
-              "2. crumple plastic if possible;\n"
-              "3. put the caps in a separate bag, as the material from which they are made differs from the material of the bottle.\n",
-          style: const TextStyle(
-            fontFamily: kButtonFont,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600,
-          ),
-          textAlign: TextAlign.center,
-        )
-    );
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text(
+                        "There are 7 types of plastic, some of them are recycled and reused, others are not, and it is important to distinguish them from each other by labeling them. Plastic products marked PET, PEHD(HDPE), LDPE, PP, PS are recyclable and can be recycled. But its important to pay attention to the trash can you throw in, as some only accept certain types of plastic. Plastic labeled PVC or OTHER is not recyclable due to its complex composition and harmful emissions during their disposal. They should be thrown into the general trash can.\nHow to properly dispose of plastic?\n"
+                            "\n"
+                            "1. Prepare waste before disposal: containers must be clean, dried, it is advisable to remove stickers, labels;\n\n"
+                            "2. crumple plastic if possible;\n\n"
+                            "3. put the caps in a separate bag, as the material from which they are made differs from the material of the bottle.\n\n",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
+    return Scaffold(
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text(
+                        "There are 7 types of plastic, some of them are recycled and reused, others are not, and it is important to distinguish them from each other by labeling them. Plastic products marked PET, PEHD(HDPE), LDPE, PP, PS are recyclable and can be recycled. But its important to pay attention to the trash can you throw in, as some only accept certain types of plastic. Plastic labeled PVC or OTHER is not recyclable due to its complex composition and harmful emissions during their disposal. They should be thrown into the general trash can.\nHow to properly dispose of plastic?\n"
+                            "\n"
+                            "1. Prepare waste before disposal: containers must be clean, dried, it is advisable to remove stickers, labels;\n\n"
+                            "2. crumple plastic if possible;\n\n"
+                            "3. put the caps in a separate bag, as the material from which they are made differs from the material of the bottle.\n\n",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ), Image.asset("assets/photo_1.jpeg"),])));
   }
 }
 class MyPaperPage extends StatelessWidget{
@@ -457,19 +683,57 @@ class MyPaperPage extends StatelessWidget{
   Widget build(BuildContext){
     return Scaffold(
         appBar: AppBar(title: Text("SortAI"),),
-        body: Text(
-          "1. Tetra Pak: Tetra Pak does not belong to waste paper, therefore, waste paper cannot be thrown into the waste bin. It should be disposed of in a plastic/Tetra Pak container or in a general recycling bin.\n"
-              "2. Paper cup. Does not apply to waste paper. Not subject to processing. Replace disposable paper cups with a thermal mug, take care of the environment.\n"
-              "Notepads, notebooks, newspapers, magazines, documents, cardboard, colored paper, postcards, calendars, sketchbooks can be thrown into the paper container. But it is important - remove paper clips, staples, springs and adhesive inserts from them.\n",
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
 
-          style: const TextStyle(
-            fontFamily: kButtonFont,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600,
-          ),
-          textAlign: TextAlign.center,
-        )
-    );
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text(
+                    """ To ensure proper disposal, follow these recommendations:
+                    
+1) Separate paper from other types of waste, such as plastic, metal, glass, or organic materials.
+
+2) Check if the paper is clean and dry. Do not throw away paper that is wet, dirty, stained, or contaminated with food or chemicals.
+
+3) Flatten or fold the paper to reduce its volume and save space in the recycling bin.
+
+4) If possible, use a shredder to cut the paper into small pieces, especially if it contains sensitive or personal information.
+
+5) Place the paper in a designated recycling bin or bag. Make sure the bin or bag is clearly labeled as "paper" or "recycling".""",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
 
 
   }
@@ -478,101 +742,271 @@ class MyGlassPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-      appBar: AppBar(title: Text("sortAI"),),
-      body: Center(
-          child: Text(
-            "The following waste can be thrown into the glass container: glass bottles (for wine or juice), jars for jam or baby food, glass containers for medicines and cosmetics, glass bottles for perfumes. Thus, the following should not be thrown into the glass waste container: lead or crystal glass, light bulbs, window panes, mirror fragments, porcelain, ceramics, glass decorations such as Christmas balls. All this waste must be disposed of together with household waste or handed over to recycling centers.",
-            style: const TextStyle(
-              fontFamily: kButtonFont,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
-          )
-      ),
-    );
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text(
+                        "The following waste can be thrown into the glass container: glass bottles (for wine or juice), jars for jam or baby food, glass containers for medicines and cosmetics, glass bottles for perfumes. Thus, the following should not be thrown into the glass waste container: lead or crystal glass, light bulbs, window panes, mirror fragments, porcelain, ceramics, glass decorations such as Christmas balls. All this waste must be disposed of together with household waste or handed over to recycling centers.",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
   }
 }
 class MyEWastePage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-      appBar: AppBar(title: Text("sortAI"),),
-      body: Center(
-          child: Text(
-            "  1. Appliances:"
-                "   Household appliances cannot be thrown into a landfill due to their chemical composition, so household appliances must be recycled:"
-                "1 way: hand over household appliances to the store;"
-                "2 way: hand over to the reception points of your city;"
-                "3 way: call one of the recycling services that will help you take the device out."
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
 
-                "2. Communication and information technology devices:"
-                "These include cell phones; smartphones; desktop computers; computer monitors; laptops; hard disks. First of all, do not throw the device in the trash. Disposal methods:"
-                "1. Sell your old smartphone;"
-                "2. Hand over to the manufacturing company. Almost all modern electronics manufacturers offer recycling of goods and post information on their websites with the addresses of points for returning old equipment."
-                "3. Recycling program from leading stores. Many electronics stores are introducing a recycling program for old electronics, where the customer is given a discount on new smartphone models in return. This allows you to save some money on the purchase of a new device and at the same time get rid of the old one in an environmentally friendly way."
-                "Computers can be handed over to metal collection points; find specialized recycling companies that will take out and disassemble the PC; take advantage of recycling programs at home appliance stores. Hard drives are also recycled when they are returned to the store, or you can disassemble the drive and take it to a metal collection point."
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text(
+                        "1. Appliances:\n"
+                            "  Household appliances cannot be thrown into a landfill due to their chemical composition, so household appliances must be recycled:\n"
+                            " \n1 way: hand over household appliances  to the store;\n"
+                            "2 way: hand over to the reception points  of your city;\n"
+                            "3 way: call one of the recycling services  that will help you take the device out.\n"
+
+                            "\n2. Communication and information technology devices:\n"
+                            "These include cell phones; smartphones; desktop computers; computer monitors; laptops; hard disks. First of all, do not throw the device in the trash. Disposal methods:\n"
+                            "\n1. Sell your old smartphone;\n"
+                            "2. Hand over to the manufacturing company. Almost all modern electronics manufacturers offer recycling of goods and post information on their websites with the addresses of points for returning old equipment.\n"
+                            "3. Recycling program from leading stores. Many electronics stores are introducing a recycling program for old electronics, where the customer is given a discount on new smartphone models in return. This allows you to save some money on the purchase of a new device and at the same time get rid of the old one in an environmentally friendly way.\n"
+                            "Computers can be handed over to metal collection points; find specialized recycling companies that will take out and disassemble the PC; take advantage of recycling programs at home appliance stores. Hard drives are also recycled when they are returned to the store, or you can disassemble the drive and take it to a metal collection point.\n"
 
 
-                "3. Home Entertainment Devices:"
-                "This category includes the following electronic waste: DVD, Blu-Ray players; stereo; televisions; video game systems; faxes; copiers; printers. Old video cassettes and CDs can be handed over to electrical waste collection points and some separate waste collection points. An unwanted device can be taken to a recycling center, thrown into an electrical waste container, exchanged for a discount in a store, or taken to a workshop."
+                            "3. Home Entertainment Devices:\n"
+                            "This category includes the following electronic waste: DVD, Blu-Ray players; stereo; televisions; video game systems; faxes; copiers; printers. Old video cassettes and CDs can be handed over to electrical waste collection points and some separate waste collection points. An unwanted device can be taken to a recycling center, thrown into an electrical waste container, exchanged for a discount in a store, or taken to a workshop.\n"
 
-                "4. Electronic utilities:"
-                "Remove the built-in battery pack before disposing of the remote control. In every city there are electronic waste collection points where you can hand over unnecessary cables, wires, batteries. Charges take them to a special collection point for hazardous waste; take it to a store specializing in chargers and batteries. Incandescent light bulbs do not contain harmful substances and plastic, so they should be thrown into the general trash can, but they should not be thrown into the glass bin. Fluorescent lamps should not be thrown into the general trash can, but must be taken to a special recycling center, due to the content of mercury in the lamp. LED lamps can be thrown away with regular trash, but they contain metals and plastics that can be separated and sent for recycling.",
-            style: const TextStyle(
-              fontFamily: kButtonFont,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
-          )
-      ),
-    );
+                            "4. Electronic utilities:"
+                            "Remove the built-in battery pack before disposing of the remote control. In every city there are electronic waste collection points where you can hand over unnecessary cables, wires, batteries. Charges take them to a special collection point for hazardous waste; take it to a store specializing in chargers and batteries. Incandescent light bulbs do not contain harmful substances and plastic, so they should be thrown into the general trash can, but they should not be thrown into the glass bin. Fluorescent lamps should not be thrown into the general trash can, but must be taken to a special recycling center, due to the content of mercury in the lamp. LED lamps can be thrown away with regular trash, but they contain metals and plastics that can be separated and sent for recycling.\n",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
   }
 }
 class MyMetalPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("sortAI"),),
-        body: Center(
-          child: Text( "This type of garbage includes metal caps; cans and aluminum cans, foil. Before you get rid of them, rinse each jar. Squeeze aluminum cans as much as possible so that they take up as little space as possible. The condition of the scrap metal for release does not really matter - it is burnt, rusty.",
-            style: const TextStyle(
-              fontFamily: kButtonFont,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
 
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
 
+                      child: Text( "This type of garbage includes metal caps; \ncans and aluminum cans, foil. Before you get rid of them, rinse each jar. \nSqueeze aluminum cans as much as possible so that they take up as little space as possible. The condition of the scrap metal for release does not really matter - it is burnt, rusty.",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
 
+                    ),
 
-
-          ),
-        )
-    );
+                  ),])));
   }
 }
 class MyMedicalPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-      appBar: AppBar(title: Text("sortAI"),),
-      body: Center(
-          child: Text("There are seven types of plastic, some of them are recycled and reused, others are not, and it is important to distinguish them from each other by labeling them. Plastic products marked PET, PEHD(HDPE), LDPE, PP, PS are recyclable and can be recycled. But its important to pay attention to the trash can you throw in, as some only accept certain types of plastic. Plastic labeled PVC or OTHER is not recyclable due to its complex composition and harmful emissions during their disposal. They should be thrown into the general trash can. How to properly dispose of plastic?"
-              "1. Prepare waste before disposal: containers must be clean, dried, it is advisable to remove stickers, labels;"
-              "2. crumple plastic if possible;"
-              "3. put the caps in a separate bag, as the material from which they are made differs from the material of the bottle.",
-            style: const TextStyle(
-              fontFamily: kButtonFont,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,)
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text("Medical syringes are objects with an approved hazard class. Self-disposal of the syringe is not possible, but there are practical ways to significantly reduce the harm caused:\n\n"
+                          "1) After using it, you can not immediately throw it into the trash; \n"
+                          "2) Separate the cap with the needle from the syringe;\n"
+                          "3) Place the needle in special containers - they are made of puncture-resistant plastic with a tight-fitting lid. In the absence of such containers, you can use a suitable container for detergent or other household chemicals made of durable plastic. \n"
+                          "4) When filling the container, you need to place it in the middle of the trash can. Never throw needles down the toilet. ",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
+  }
+}
 
 
+class TetrapakPage extends StatelessWidget{
+  @override
+  Widget build(BuildContext){
+    return Scaffold(
+        appBar: AppBar(title: Text("SortAI"),),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  Stack(children: [Container(
+                    height: 100,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
 
-      ),
-    );
+                    ),
+                  ), Container(
+                    height: 250,
+                    width: 500,
+                    margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                    decoration: new BoxDecoration(
+                      color: Color(0xfff1f1f1),
+                      borderRadius: new BorderRadius.all(Radius.elliptical(100, 50)),
+                    ),
+                  ), Padding(padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+                      child:Align( alignment: Alignment.center,
+                          child: Image.asset("assets/img/containers/black.png", height: 210, width: 210, )))]),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    // child: Image.asset("assets/photo_1.jpeg"),
+                    child: Flexible(
+
+                      child: Text("""Here are some recommendations on how to correctly throw away tetrapak:
+
+- Check if your local recycling facility can process tetrapak (You can ask this in our ChatBot).
+
+- If your area participates in tetrapak recycling, place the empty cartons in your regular recycling bin. Make sure to rinse the inside of the package and remove the plastic cap before disposing.
+
+- If your area does not have a tetrapak recycling facility, you can ship your cartons to the Carton Council. Or waste it like a Cardboard.
+
+- You can also contact your local Waste Management branch and Tetra Pak to request that your area be added to the recycling program.
+
+- Alternatively, you can repurpose your tetrapak for various uses, such as planting seeds, storing craft supplies, or making food containers.""",
+                        style: const TextStyle(
+                          fontFamily: kButtonFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+
+                    ),
+
+                  ),])));
+
   }
 }

@@ -59,7 +59,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.lightGreen.shade50,
       width: double.infinity,
       child: Column(
         mainAxisSize: MainAxisSize.max,
