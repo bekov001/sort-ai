@@ -21,11 +21,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SortAI',
       theme: ThemeData(
-          primarySwatch: Colors.green
-      ),
+
+        appBarTheme: AppBarTheme( backgroundColor: Colors.green, titleTextStyle: TextStyle( color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold)),
+    ),
       home: const MyHomePage(title: 'SortAI'),
       debugShowCheckedModeBanner: false,
     );
+
   }
 }
 
@@ -382,6 +384,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+
       ),
       body: _bodyWidget,
       bottomNavigationBar: BottomNavigationBar(
@@ -439,7 +442,7 @@ class CustomMap extends StatefulWidget {
 
 class _CustomMapState extends State<CustomMap> {
   GoogleMapController? _controller;
-  static const LatLng _center = LatLng(43.250000, 76.900000);
+  static const LatLng _center = LatLng(51.169392, 71.449074);
 
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
@@ -595,6 +598,19 @@ class _CustomMapState extends State<CustomMap> {
 
 
         ),
+
+        Marker(
+            markerId: const MarkerId('marker10'),
+            position: const LatLng(51.076357	, 71.424103),
+            infoWindow: InfoWindow(
+              title: 'LS Astana',
+              snippet:
+              ['Центр по переработке отходов', '8 (700) 500 3354', 'пр-т. Мангилик Ел. 50, Астана 020000'].join(', '),
+            )
+
+
+        ),
+
       },
     );
   }}
@@ -602,7 +618,7 @@ class MyPlasticPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("SortAI"),),
+        appBar: AppBar(title: Text("SortAI")),
         body: SingleChildScrollView(
             child: Column(
                 children: <Widget>[
@@ -682,7 +698,7 @@ class MyPaperPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("SortAI"),),
+        appBar: AppBar(title: Text("SortAI"), ),
         body: SingleChildScrollView(
             child: Column(
                 children: <Widget>[
@@ -742,7 +758,7 @@ class MyGlassPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("SortAI"),),
+        appBar: AppBar(title: Text("SortAI"), ),
         body: SingleChildScrollView(
             child: Column(
                 children: <Widget>[
@@ -856,7 +872,7 @@ class MyMetalPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("SortAI"),),
+        appBar: AppBar(title: Text("SortAI"), ),
         body: SingleChildScrollView(
             child: Column(
                 children: <Widget>[
@@ -903,7 +919,7 @@ class MyMedicalPage extends StatelessWidget{
   @override
   Widget build(BuildContext){
     return Scaffold(
-        appBar: AppBar(title: Text("SortAI"),),
+        appBar: AppBar(title: Text("SortAI")),
         body: SingleChildScrollView(
             child: Column(
                 children: <Widget>[

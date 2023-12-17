@@ -24,7 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     chatGPT = OpenAI.instance.build(
-        token: "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",
+        token: "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",
         baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 50)));
     // final request = CompleteText(prompt: "you`re",
     //     model: kTextDavinci3);
@@ -53,10 +53,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _controller.clear();
 
-      final request = CompleteText(prompt: message.text,
+      final request = CompleteText(prompt: "answer on this question only if it have connection with ecology and recycling." + message.text,
           model: kTextDavinci3);
 
-      final response = await chatGPT!.onCompletion(request: request);
+      final response = await chatGPT!.onCompletion(request:  (  request));
       Vx.log(response!.choices[0].text);
       insertNewData(response.choices[0].text);
 
